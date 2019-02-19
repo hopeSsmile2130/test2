@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>test</title>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <input type="text" v-model="task">
+            <button @click="addtask">add</button>
+        </div>
+        <ul>
+            <li v-for="(t , index) in tasks"  :style="{'text-decoration': t.status ? 'line-through' : ''}">
+                <input type="checkbox" v-model="t.status" >
+                <label >{{t.name}}</label>
+                <!-- <span></span> -->
+                <button @click="deletetask(t)">X</button>
+                <!-- <button @click="deletetask(index)">by index</button> -->
+            </li>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      new Vue({
+            el:"#app",
+            data : {
+                type:"",
+                task:"",
+                tasks:[],
+            },
+            methods: {
+                
+                addtask(){
+                  console.log("create " + this.task);
+                    this.tasks.push({name:this.task,status:false});
+                    this.task="";
+                    
+                },
+                deletetask(t){
+                     var index = this.tasks.indexOf(t); 
+                    //  console.log("delete " + t + index);
+                    //  this.tasks.splice(index,1);
+                        this.tasks.splice(index,1);        
+                },
+                changetaskstatus(t){
+
+                    console.log("change " + t);
+                
+                  
+                   var index = this.tasks.indexOf(t);
+                    console.log("index " + index);
+                    this.type="line-through";
+                //   #index.style.textDecoration ="line-through";
+
+
+                }
+                
+                
+            },
+      });
+    </script>
+    <!-- <style>
+    #index
+    {
+    text-decoration:line-through
+
+    }
+    </style> -->
+</body>
+</html>
